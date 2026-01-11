@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Key Features - RIMS</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Slate 900 */
+            color: white;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 2.5rem 3.5rem;
+            background-color: #0f172a;
+        }
+
+        /* Background Accents - Solid colors with blur instead of gradients */
+        .bg-blob-1 {
+            position: absolute;
+            top: -100px;
+            right: -50px;
+            width: 500px;
+            height: 500px;
+            background-color: #1e3a8a; /* Blue 900 */
+            border-radius: 50%;
+            opacity: 0.3;
+            filter: blur(80px);
+            z-index: 0;
+        }
+
+        .bg-blob-2 {
+            position: absolute;
+            bottom: -100px;
+            left: -50px;
+            width: 500px;
+            height: 500px;
+            background-color: #0e7490; /* Cyan 700 */
+            border-radius: 50%;
+            opacity: 0.2;
+            filter: blur(70px);
+            z-index: 0;
+        }
+
+        /* Content Layout */
+        .header-section {
+            z-index: 10;
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.75rem;
+            font-weight: 800;
+            color: #f8fafc;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: #94a3b8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Grid Layout */
+        .features-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            z-index: 10;
+            height: 100%;
+            align-content: center;
+        }
+
+        /* Feature Card */
+        .feature-card {
+            background-color: rgba(30, 41, 59, 0.5); /* Slate 800/50 */
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            width: calc(25% - 1.2rem); /* 4 cards per row approx */
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            background-color: rgba(30, 41, 59, 0.8);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Icon Styling */
+        .icon-box {
+            width: 54px;
+            height: 54px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover .icon-box {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Color Themes for Cards */
+        .theme-cyan { background: rgba(34, 211, 238, 0.1); color: #22d3ee; border: 1px solid rgba(34, 211, 238, 0.2); }
+        .theme-amber { background: rgba(251, 191, 36, 0.1); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.2); }
+        .theme-green { background: rgba(74, 222, 128, 0.1); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.2); }
+        .theme-purple { background: rgba(192, 132, 252, 0.1); color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.2); }
+        .theme-rose { background: rgba(251, 113, 133, 0.1); color: #fb7185; border: 1px solid rgba(251, 113, 133, 0.2); }
+        .theme-blue { background: rgba(96, 165, 250, 0.1); color: #60a5fa; border: 1px solid rgba(96, 165, 250, 0.2); }
+        .theme-indigo { background: rgba(129, 140, 248, 0.1); color: #818cf8; border: 1px solid rgba(129, 140, 248, 0.2); }
+
+        /* Typography */
+        .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-desc {
+            font-size: 0.875rem;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        /* Corner Accent */
+        .corner-accent {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            opacity: 0.1;
+            border-radius: 0 0 0 100%;
+            transition: opacity 0.3s;
+        }
+        
+        .feature-card:hover .corner-accent {
+            opacity: 0.3;
+        }
+
+        .accent-cyan { background-color: #22d3ee; }
+        .accent-amber { background-color: #fbbf24; }
+        .accent-green { background-color: #4ade80; }
+        .accent-purple { background-color: #c084fc; }
+        .accent-rose { background-color: #fb7185; }
+        .accent-blue { background-color: #60a5fa; }
+        .accent-indigo { background-color: #818cf8; }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Elements -->
+<div class="bg-blob-1"></div>
+<div class="bg-blob-2"></div>
+<!-- Header -->
+<div class="header-section">
+<h2>Key Features &amp; Functionalities</h2>
+<p class="subtitle">A comprehensive suite of tools designed to automate, analyze, and optimize institutional research workflows.</p>
+</div>
+<!-- Features Grid -->
+<div class="features-wrapper">
+<!-- Feature 1: DOI Automation -->
+<div class="feature-card">
+<div class="corner-accent accent-cyan"></div>
+<div class="icon-box theme-cyan">
+<i class="fas fa-magic"></i>
+</div>
+<h3 class="card-title">DOI Automation</h3>
+<p class="card-desc">One-click metadata fetching from Crossref. Automatically links authors and populates publication details.</p>
+</div>
+<!-- Feature 2: OCR Processing -->
+<div class="feature-card">
+<div class="corner-accent accent-amber"></div>
+<div class="icon-box theme-amber">
+<i class="fas fa-eye"></i>
+</div>
+<h3 class="card-title">OCR Processing</h3>
+<p class="card-desc">Intelligent text extraction from scanned award certificates and PDFs with confidence scoring.</p>
+</div>
+<!-- Feature 3: SDG Mapping -->
+<div class="feature-card">
+<div class="corner-accent accent-green"></div>
+<div class="icon-box theme-green">
+<i class="fas fa-globe-americas"></i>
+</div>
+<h3 class="card-title">SDG Mapping</h3>
+<p class="card-desc">Auto-classification of publications into UN Sustainable Development Goals to track social impact.</p>
+</div>
+<!-- Feature 4: Role-Based Dashboards -->
+<div class="feature-card">
+<div class="corner-accent accent-purple"></div>
+<div class="icon-box theme-purple">
+<i class="fas fa-users-cog"></i>
+</div>
+<h3 class="card-title">Role-Based Access</h3>
+<p class="card-desc">Tailored dashboards for Faculty, HODs, and Administrators ensuring relevant data visibility.</p>
+</div>
+<!-- Feature 5: Data Integrity -->
+<div class="feature-card">
+<div class="corner-accent accent-rose"></div>
+<div class="icon-box theme-rose">
+<i class="fas fa-check-double"></i>
+</div>
+<h3 class="card-title">Duplicate Detection</h3>
+<p class="card-desc">Advanced algorithms to identify and merge duplicate records, maintaining a clean dataset.</p>
+</div>
+<!-- Feature 6: Real-Time Analytics -->
+<div class="feature-card">
+<div class="corner-accent accent-blue"></div>
+<div class="icon-box theme-blue">
+<i class="fas fa-chart-line"></i>
+</div>
+<h3 class="card-title">Real-Time Reporting</h3>
+<p class="card-desc">Live visualization of citations, funding, and publication trends for instant strategic insights.</p>
+</div>
+<!-- Feature 7: Compliance Exports -->
+<div class="feature-card">
+<div class="corner-accent accent-indigo"></div>
+<div class="icon-box theme-indigo">
+<i class="fas fa-file-export"></i>
+</div>
+<h3 class="card-title">Compliance Exports</h3>
+<p class="card-desc">Pre-formatted data exports for NAAC, NIRF, and NBA accreditation bodies, saving months of work.</p>
+</div>
+</div>
+</div>
+</body>
+</html>

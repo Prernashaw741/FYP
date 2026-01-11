@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Benefits &amp; Impact - RIMS</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Slate 900 */
+            color: white;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #0f172a;
+            overflow: hidden;
+            padding: 2.5rem 3.5rem;
+        }
+
+        /* Background Elements - Solid colors with blur */
+        .bg-blob-1 {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 700px;
+            height: 700px;
+            background-color: #0f766e; /* Teal 700 */
+            border-radius: 50%;
+            opacity: 0.15;
+            filter: blur(100px);
+            z-index: 0;
+        }
+
+        .bg-blob-2 {
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 600px;
+            height: 600px;
+            background-color: #1e3a8a; /* Blue 900 */
+            border-radius: 50%;
+            opacity: 0.2;
+            filter: blur(80px);
+            z-index: 0;
+        }
+
+        /* Header */
+        .header-section {
+            z-index: 10;
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #f8fafc;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: flex;
+            gap: 2rem;
+            flex: 1;
+            z-index: 10;
+            height: 100%;
+        }
+
+        /* Columns */
+        .impact-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .impact-column:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Column Themes */
+        .col-faculty {
+            background-color: rgba(15, 23, 42, 0.6);
+            border-top: 4px solid #38bdf8; /* Sky 400 */
+        }
+
+        .col-admin {
+            background-color: rgba(15, 23, 42, 0.6);
+            border-top: 4px solid #34d399; /* Emerald 400 */
+        }
+
+        /* Column Header */
+        .col-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .col-icon-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .col-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .col-subtitle {
+            font-size: 0.875rem;
+            color: #94a3b8;
+            margin-top: 0.25rem;
+        }
+
+        /* List Items */
+        .benefit-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .benefit-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 12px;
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background-color 0.2s;
+        }
+
+        .benefit-card:hover {
+            background-color: rgba(255, 255, 255, 0.07);
+        }
+
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .benefit-content h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin: 0 0 0.25rem 0;
+        }
+
+        .benefit-content p {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        /* Specific Theme Colors */
+        /* Faculty - Blue/Sky */
+        .theme-faculty .col-icon-box { background-color: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+        .theme-faculty .benefit-icon { background-color: rgba(14, 165, 233, 0.15); color: #7dd3fc; }
+        
+        /* Admin - Emerald */
+        .theme-admin .col-icon-box { background-color: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .theme-admin .benefit-icon { background-color: rgba(16, 185, 129, 0.15); color: #6ee7b7; }
+
+        /* Central Divider (Visual only) */
+        .vs-badge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background-color: #0f172a;
+            border: 2px solid #334155;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #64748b;
+            font-weight: 800;
+            font-size: 0.9rem;
+            z-index: 20;
+            box-shadow: 0 0 0 8px rgba(15, 23, 42, 0.8);
+        }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Backgrounds -->
+<div class="bg-blob-1"></div>
+<div class="bg-blob-2"></div>
+<!-- Header -->
+<div class="header-section">
+<h2>Benefits &amp; Strategic Impact</h2>
+<p class="subtitle">Delivering tangible value to both individual researchers and the institution as a whole through automation and insight.</p>
+</div>
+<!-- VS Badge -->
+<div class="vs-badge">VS</div>
+<!-- Main Content -->
+<div class="content-wrapper">
+<!-- Left Column: Faculty -->
+<div class="impact-column col-faculty theme-faculty">
+<div class="col-header">
+<div class="col-icon-box">
+<i class="fas fa-chalkboard-teacher"></i>
+</div>
+<div>
+<h3 class="col-title">For Faculty</h3>
+<p class="col-subtitle">Researchers, Professors &amp; Scholars</p>
+</div>
+</div>
+<div class="benefit-list">
+<!-- Item 1 -->
+<div class="benefit-card">
+<div class="benefit-icon"><i class="fas fa-bolt"></i></div>
+<div class="benefit-content">
+<h4>Faster Submissions</h4>
+<p>Reduce data entry time by 80% using DOI automation. No more manual typing of journal details.</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="benefit-card">
+<div class="benefit-icon"><i class="fas fa-sync-alt"></i></div>
+<div class="benefit-content">
+<h4>Auto-Citation Sync</h4>
+<p>Keep profiles perpetually up-to-date with automated citation tracking from major indexes.</p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="benefit-card">
+<div class="benefit-icon"><i class="fas fa-chart-line"></i></div>
+<div class="benefit-content">
+<h4>Personalized Dashboards</h4>
+<p>Track your own H-index, i10-index, and publication growth visualized in real-time.</p>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="benefit-card">
+<div class="benefit-icon"><i class="fas fa-file-pdf"></i></div>
+<div class="benefit-content">
+<h4>Effortless Reporting</h4>
+<p>Generate CVs and annual appraisal reports with a single click in standard formats.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Admin -->
+<div class="impact-column col-admin theme-admin">
+<div class="col-header">
+<div class="col-icon-box">
+<i class="fas fa-university"></i>
+</div>
+<div>
+<h3 class="col-title">For Institution</h3>
+<p class="col-subtitle">Administrators, Deans &amp; HODs</p>
+</div>
+</div>
+<div class="benefit-list">
+<!-- Item 1 -->
+<div class="benefit-card">
+<div class="benefit-icon"><i class="fas fa-clipboard-check"></i></div>
+<div class="benefit-content">
+<h4>Compliance Ready</h4>
+<p>One-click data export formatted specifically for NAAC, NIRF, and NBA accreditation bodies.</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="benefit-card">
+<div class="benefit-icon"><i class="fas fa-database"></i></div>
+<div class="benefit-content">
+<h4>Centralized Repository</h4>
+<p>A single source of truth for all institutional research assets, eliminating data silos.</p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="benefit-card">
+<div class="benefit-icon"><i class="fas fa-chart-pie"></i></div>
+<div class="benefit-content">
+<h4>Transparency for Rankings</h4>
+<p>Accurate, verifiable data prevents underreporting and boosts global ranking potential.</p>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="benefit-card">
+<div class="benefit-icon"><i class="fas fa-users-cog"></i></div>
+<div class="benefit-content">
+<h4>Reduced Admin Burden</h4>
+<p>Free up administrative staff from months of manual data reconciliation and error checking.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

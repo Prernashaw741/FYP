@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Proposed Solution - RIMS</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: white;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            background-color: #0f172a;
+            overflow: hidden;
+        }
+
+        /* Simulated Gradients using Blobs */
+        .blob-1 {
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 600px;
+            height: 600px;
+            background-color: #0e7490; /* Cyan 700 */
+            border-radius: 50%;
+            opacity: 0.15;
+            filter: blur(80px);
+            z-index: 0;
+        }
+
+        .blob-2 {
+            position: absolute;
+            bottom: -150px;
+            right: -50px;
+            width: 700px;
+            height: 700px;
+            background-color: #1e3a8a; /* Blue 900 */
+            border-radius: 50%;
+            opacity: 0.2;
+            filter: blur(80px);
+            z-index: 0;
+        }
+
+        .blob-3 {
+            position: absolute;
+            top: 40%;
+            left: 40%;
+            width: 300px;
+            height: 300px;
+            background-color: #4f46e5; /* Indigo 600 */
+            border-radius: 50%;
+            opacity: 0.1;
+            filter: blur(60px);
+            z-index: 0;
+        }
+
+        /* Layout */
+        .content-wrapper {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            padding: 4rem 5rem;
+        }
+
+        /* Left Column */
+        .left-col {
+            flex: 0 0 40%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-right: 3rem;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            color: #f8fafc;
+        }
+
+        .tag-pill {
+            display: inline-block;
+            background-color: rgba(34, 211, 238, 0.1);
+            color: #22d3ee;
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+            width: fit-content;
+        }
+
+        .description {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+        }
+
+        .highlight-bar {
+            width: 4px;
+            height: 100%;
+            background-color: #3b82f6;
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 2px;
+        }
+
+        .quote-box {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        /* Right Column */
+        .right-col {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            align-content: center;
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            background-color: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 16px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(30, 41, 59, 0.8);
+            border-color: rgba(56, 189, 248, 0.3); /* Sky 400 */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-container {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            font-size: 1.5rem;
+        }
+
+        /* Icon Styles */
+        .icon-auto { background: rgba(56, 189, 248, 0.1); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.2); }
+        .icon-dash { background: rgba(168, 85, 247, 0.1); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.2); }
+        .icon-comp { background: rgba(234, 179, 8, 0.1); color: #eab308; border: 1px solid rgba(234, 179, 8, 0.2); }
+        .icon-sdg { background: rgba(34, 197, 94, 0.1); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.2); }
+
+        .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: #f8fafc;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        /* Decorative dots */
+        .dots-grid {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+            opacity: 0.2;
+        }
+        .dot {
+            width: 3px;
+            height: 3px;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Blobs -->
+<div class="blob-1"></div>
+<div class="blob-2"></div>
+<div class="blob-3"></div>
+<!-- Decorative Dots Top Right -->
+<div class="dots-grid">
+<!-- 4x4 Grid of dots generated manually without JS loops -->
+<div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+<div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+<div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+<div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+</div>
+<div class="content-wrapper">
+<!-- Left Column: The "What" -->
+<div class="left-col">
+<div class="tag-pill">Proposed Solution</div>
+<h2>
+                    Introducing <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500" style="background-image: none; color: #22d3ee;">RIMS</span>
+</h2>
+<div class="quote-box">
+<div class="highlight-bar"></div>
+<p class="description">
+                        An <strong>AI-Driven Research Information Management System</strong> that acts as a centralized "single source of truth" for your institution.
+                    </p>
+<p class="description" style="margin-bottom: 0;">
+                        RIMS moves beyond simple storage to actively organize, validate, and showcase research output, transforming manual chaos into strategic intelligence.
+                    </p>
+</div>
+<div class="mt-8 flex items-center gap-4 text-sm text-gray-400 font-medium">
+<span class="flex items-center"><i class="fas fa-check-circle text-green-400 mr-2"></i> Unified Data</span>
+<span class="flex items-center"><i class="fas fa-check-circle text-green-400 mr-2"></i> Zero Redundancy</span>
+</div>
+</div>
+<!-- Right Column: The "How" (Capabilities) -->
+<div class="right-col">
+<!-- Card 1: Intelligent Automation -->
+<div class="feature-card">
+<div class="icon-container icon-auto">
+<i class="fas fa-robot"></i>
+</div>
+<h3 class="card-title">Intelligent Automation</h3>
+<p class="card-text">
+                        Eliminates manual entry by fetching metadata via DOIs and using OCR to extract data from award certificates automatically.
+                    </p>
+</div>
+<!-- Card 2: Real-Time Analytics -->
+<div class="feature-card">
+<div class="icon-container icon-dash">
+<i class="fas fa-chart-pie"></i>
+</div>
+<h3 class="card-title">Real-Time Dashboards</h3>
+<p class="card-text">
+                        Instant visibility into faculty performance, department growth, and citation metrics for data-driven decision making.
+                    </p>
+</div>
+<!-- Card 3: Compliance Exports -->
+<div class="feature-card">
+<div class="icon-container icon-comp">
+<i class="fas fa-file-contract"></i>
+</div>
+<h3 class="card-title">Compliance Ready</h3>
+<p class="card-text">
+                        Generates pre-formatted reports for NAAC, NIRF, and NBA accreditations with a single click, ensuring 100% accuracy.
+                    </p>
+</div>
+<!-- Card 4: Strategic Mapping -->
+<div class="feature-card">
+<div class="icon-container icon-sdg">
+<i class="fas fa-globe-americas"></i>
+</div>
+<h3 class="card-title">SDG Impact Mapping</h3>
+<p class="card-text">
+                        Automatically tags research publications with relevant UN Sustainable Development Goals to showcase global impact.
+                    </p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

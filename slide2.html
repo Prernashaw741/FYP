@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Problem Statement - RIMS</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Slate 900 */
+            color: white;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* Background Accents */
+        .bg-accent-1 {
+            position: absolute;
+            top: -10%;
+            left: -5%;
+            width: 600px;
+            height: 600px;
+            background-color: #1e3a8a; /* Blue 900 */
+            border-radius: 50%;
+            opacity: 0.2;
+            filter: blur(80px);
+            z-index: 0;
+        }
+
+        .bg-accent-2 {
+            position: absolute;
+            bottom: -10%;
+            right: -5%;
+            width: 500px;
+            height: 500px;
+            background-color: #06b6d4; /* Cyan 500 */
+            border-radius: 50%;
+            opacity: 0.1;
+            filter: blur(60px);
+            z-index: 0;
+        }
+
+        /* Layout */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            width: 100%;
+            height: 100%;
+            padding: 4rem 5rem;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* Typography */
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        .section-tag {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #22d3ee; /* Cyan 400 */
+            margin-bottom: 1rem;
+            display: inline-block;
+            border-bottom: 2px solid #22d3ee;
+            padding-bottom: 0.25rem;
+        }
+
+        /* Content Styling */
+        .problem-desc {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #e2e8f0;
+            margin-bottom: 2.5rem;
+            border-left: 4px solid #3b82f6; /* Blue 500 */
+            padding-left: 1.5rem;
+        }
+
+        .issue-card {
+            background-color: rgba(30, 41, 59, 0.6); /* Slate 800 with opacity */
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            transition: transform 0.2s ease;
+        }
+        
+        .issue-card:hover {
+            background-color: rgba(30, 41, 59, 0.9);
+            border-color: rgba(34, 211, 238, 0.4);
+        }
+
+        .issue-icon {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #ef4444; /* Red 500 */
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .issue-content h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0 0 0.25rem 0;
+            color: #f8fafc;
+        }
+
+        .issue-content p {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        /* Visual Column Styling */
+        .visual-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .visual-circle-main {
+            width: 280px;
+            height: 280px;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+            border-radius: 50%;
+            border: 2px solid rgba(239, 68, 68, 0.3); /* Red border for 'Problem' */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 0 40px rgba(0,0,0,0.3);
+        }
+
+        .visual-icon-main {
+            font-size: 5rem;
+            color: #ef4444;
+            opacity: 0.9;
+        }
+
+        .orbit-item {
+            position: absolute;
+            background-color: #1e293b;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            width: 180px;
+        }
+        
+        .orbit-item i {
+            font-size: 1.25rem;
+        }
+
+        /* Positioning orbit items */
+        .orbit-1 { top: 10%; right: -10%; }
+        .orbit-2 { bottom: 15%; left: -15%; }
+        .orbit-3 { top: 20%; left: -10%; }
+        
+        .connector-line {
+            position: absolute;
+            background-color: rgba(148, 163, 184, 0.2);
+            z-index: -1;
+        }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<div class="bg-accent-1"></div>
+<div class="bg-accent-2"></div>
+<div class="content-grid">
+<!-- Left Column: Content -->
+<div class="flex flex-col justify-center">
+<div class="mb-2">
+<span class="section-tag">Current Landscape</span>
+</div>
+<h2 class="text-5xl font-bold text-white mb-6 leading-tight">
+                Problem <br/>Statement
+            </h2>
+<p class="problem-desc">
+                Universities struggle with fragmented, manual research data management. The lack of a centralized system creates significant bottlenecks in tracking faculty output, ensuring compliance, and maintaining institutional credibility.
+            </p>
+<div class="space-y-4">
+<div class="issue-card">
+<div class="issue-icon">
+<i class="fas fa-file-upload"></i>
+</div>
+<div class="issue-content">
+<h3>Manual Data Entry</h3>
+<p>Faculty spend months uploading publications individually across multiple disjointed portals.</p>
+</div>
+</div>
+<div class="issue-card">
+<div class="issue-icon">
+<i class="fas fa-clipboard-list"></i>
+</div>
+<div class="issue-content">
+<h3>Administrative Burden</h3>
+<p>Generating compliance reports for NAAC/NIRF/NBA is a tedious, error-prone manual process.</p>
+</div>
+</div>
+<div class="issue-card">
+<div class="issue-icon">
+<i class="fas fa-chart-line-down"></i>
+</div>
+<div class="issue-content">
+<h3>Lack of Insights</h3>
+<p>No real-time analytics leads to underreported outputs and missed ranking opportunities.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Visual -->
+<div class="visual-container">
+<!-- Connecting lines -->
+<div class="connector-line" style="width: 2px; height: 300px; transform: rotate(15deg);"></div>
+<div class="connector-line" style="width: 300px; height: 2px; transform: rotate(-15deg);"></div>
+<!-- Central Hub -->
+<div class="visual-circle-main">
+<i class="fas fa-network-wired visual-icon-main"></i>
+<div class="absolute text-sm text-gray-400 font-mono mt-24 pt-4 uppercase tracking-widest">Inefficiency</div>
+</div>
+<!-- Floating Satellite Cards -->
+<div class="orbit-item orbit-1">
+<i class="fas fa-clock text-yellow-500"></i>
+<div>
+<p class="text-xs text-gray-400 uppercase font-bold">Time Lost</p>
+<p class="text-sm font-semibold text-white">High Latency</p>
+</div>
+</div>
+<div class="orbit-item orbit-2">
+<i class="fas fa-exclamation-triangle text-red-500"></i>
+<div>
+<p class="text-xs text-gray-400 uppercase font-bold">Data Errors</p>
+<p class="text-sm font-semibold text-white">Inconsistency</p>
+</div>
+</div>
+<div class="orbit-item orbit-3">
+<i class="fas fa-database text-purple-500"></i>
+<div>
+<p class="text-xs text-gray-400 uppercase font-bold">Silos</p>
+<p class="text-sm font-semibold text-white">Fragmented</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

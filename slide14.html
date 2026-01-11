@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Conclusion - RIMS</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Slate 900 */
+            color: white;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            background-color: #0f172a;
+            overflow: hidden;
+        }
+
+        /* Abstract Background Elements */
+        .bg-shape-1 {
+            position: absolute;
+            top: -150px;
+            right: -100px;
+            width: 600px;
+            height: 600px;
+            background-color: #1e293b;
+            border-radius: 50%;
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        .bg-shape-2 {
+            position: absolute;
+            bottom: -200px;
+            left: -100px;
+            width: 500px;
+            height: 500px;
+            background-color: #0f172a;
+            border: 2px solid rgba(6, 182, 212, 0.1); /* Cyan border */
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        /* Layout Grid */
+        .main-content {
+            display: grid;
+            grid-template-columns: 35% 65%;
+            width: 100%;
+            height: 100%;
+            padding: 3rem 4rem;
+            z-index: 10;
+        }
+
+        /* Left Column Styles */
+        .left-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-right: 2rem;
+            border-right: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: #f8fafc;
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .highlight-text {
+            color: #22d3ee; /* Cyan 400 */
+        }
+
+        /* Right Column Styles - The List */
+        .right-col {
+            padding-left: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .takeaway-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.25rem;
+            background: rgba(30, 41, 59, 0.4); /* Slate 800 transparent */
+            padding: 1.15rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .takeaway-item:hover {
+            background: rgba(30, 41, 59, 0.8);
+            transform: translateX(10px);
+            border-color: rgba(34, 211, 238, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1.25rem;
+            flex-shrink: 0;
+            font-size: 1.25rem;
+        }
+
+        /* Icon Variants for Conclusion */
+        .icon-gap { background: rgba(20, 184, 166, 0.1); color: #14b8a6; } /* Teal */
+        .icon-auto { background: rgba(168, 85, 247, 0.1); color: #a855f7; } /* Purple */
+        .icon-scale { background: rgba(59, 130, 246, 0.1); color: #3b82f6; } /* Blue */
+        .icon-insight { background: rgba(245, 158, 11, 0.1); color: #f59e0b; } /* Amber */
+        .icon-future { background: rgba(244, 63, 94, 0.1); color: #f43f5e; } /* Rose */
+
+        .content-box {
+            flex: 1;
+        }
+
+        .item-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #e2e8f0;
+            margin-bottom: 0.25rem;
+        }
+
+        .item-desc {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.4;
+        }
+
+        /* Decorative Number */
+        .bg-number {
+            position: absolute;
+            bottom: -20px;
+            right: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.03);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Elements -->
+<div class="bg-shape-1"></div>
+<div class="bg-shape-2"></div>
+<div class="bg-number">14</div>
+<div class="main-content">
+<!-- Left Panel -->
+<div class="left-col">
+<div class="mb-4">
+<span class="px-3 py-1 bg-cyan-900 bg-opacity-30 text-cyan-400 text-xs font-bold uppercase tracking-wider rounded-full border border-cyan-800">Project Summary</span>
+</div>
+<h2>
+                Project <span class="highlight-text">Conclusion</span>
+</h2>
+<p class="subtitle">
+                The Research Information Management System (RIMS) successfully modernizes academic data handling through intelligent automation and centralization.
+            </p>
+<div class="mt-8 p-6 bg-slate-800 bg-opacity-50 rounded-xl border border-slate-700 backdrop-filter backdrop-blur-sm">
+<div class="flex items-center mb-2">
+<i class="fas fa-check-circle text-teal-400 mr-3 text-xl"></i>
+<span class="text-white font-semibold">Mission Accomplished</span>
+</div>
+<p class="text-sm text-gray-400">
+                    We have built a scalable foundation that transforms how the institution manages, reports, and visualizes research output.
+                </p>
+</div>
+</div>
+<!-- Right Panel -->
+<div class="right-col">
+<!-- Item 1 -->
+<div class="takeaway-item">
+<div class="icon-box icon-gap">
+<i class="fas fa-layer-group"></i>
+</div>
+<div class="content-box">
+<div class="item-title">Addresses Critical Gaps</div>
+<p class="item-desc">RIMS effectively unifies fragmented data sources, solving key challenges in research management and compliance.</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="takeaway-item">
+<div class="icon-box icon-auto">
+<i class="fas fa-robot"></i>
+</div>
+<div class="content-box">
+<div class="item-title">Automated Efficiency</div>
+<p class="item-desc">DOI fetching and OCR workflows significantly reduce manual effort, minimizing data entry errors and delays.</p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="takeaway-item">
+<div class="icon-box icon-scale">
+<i class="fas fa-cubes"></i>
+</div>
+<div class="content-box">
+<div class="item-title">Structured Scalability</div>
+<p class="item-desc">Robust ER modeling and UML design ensure the system is maintainable and ready for future expansion.</p>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="takeaway-item">
+<div class="icon-box icon-insight">
+<i class="fas fa-chart-line"></i>
+</div>
+<div class="content-box">
+<div class="item-title">Real-time Insights</div>
+<p class="item-desc">Interactive dashboards provide instant visibility into institutional performance and ranking metrics.</p>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="takeaway-item">
+<div class="icon-box icon-future">
+<i class="fas fa-rocket"></i>
+</div>
+<div class="content-box">
+<div class="item-title">Future-Ready Platform</div>
+<p class="item-desc">Establishes a clear technical pathway for advanced AI integration and enterprise-scale deployment.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

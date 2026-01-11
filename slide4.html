@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Impact of Challenges - RIMS</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Slate 900 */
+            color: white;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #0f172a;
+            overflow: hidden;
+            padding: 3rem 4rem;
+        }
+
+        /* Background Shapes */
+        .bg-blob-1 {
+            position: absolute;
+            top: -200px;
+            left: -100px;
+            width: 800px;
+            height: 800px;
+            background-color: #1e3a8a; /* Blue 900 */
+            border-radius: 50%;
+            opacity: 0.2;
+            filter: blur(80px);
+            z-index: 0;
+        }
+
+        .bg-blob-2 {
+            position: absolute;
+            bottom: -200px;
+            right: -100px;
+            width: 600px;
+            height: 600px;
+            background-color: #be185d; /* Pink 700 */
+            border-radius: 50%;
+            opacity: 0.1;
+            filter: blur(80px);
+            z-index: 0;
+        }
+
+        /* Header */
+        .header-section {
+            z-index: 10;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: -webkit-linear-gradient(0deg, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            max-width: 800px;
+        }
+
+        .decorative-line {
+            width: 100px;
+            height: 6px;
+            background-color: #ef4444; /* Red 500 */
+            margin-bottom: 1.5rem;
+            border-radius: 3px;
+        }
+
+        /* Content Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            z-index: 10;
+            flex: 1;
+        }
+
+        /* Impact Card */
+        .impact-card {
+            background-color: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .impact-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(239, 68, 68, 0.3);
+            background-color: rgba(30, 41, 59, 0.7);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Card Header with Icon */
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .icon-compliance { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); }
+        .icon-ranking { background: rgba(245, 158, 11, 0.1); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); }
+        .icon-credibility { background: rgba(168, 85, 247, 0.1); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.2); }
+        .icon-opportunity { background: rgba(59, 130, 246, 0.1); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.2); }
+
+        /* Typography inside cards */
+        .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #f8fafc;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            margin: 0.5rem 0;
+            letter-spacing: -0.02em;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        /* Bottom Alert Bar */
+        .alert-section {
+            z-index: 10;
+            margin-top: 2rem;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .alert-text {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            color: #fca5a5;
+        }
+
+        .arrow-indicator {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            color: rgba(255, 255, 255, 0.1);
+            font-size: 1.5rem;
+        }
+
+        /* Stat visualization bars */
+        .stat-bar-container {
+            width: 100%;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-top: auto;
+            overflow: hidden;
+        }
+
+        .stat-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+        }
+        
+        .bar-red { background-color: #ef4444; width: 85%; }
+        .bar-amber { background-color: #f59e0b; width: 70%; }
+        .bar-purple { background-color: #a855f7; width: 60%; }
+        .bar-blue { background-color: #3b82f6; width: 75%; }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<div class="bg-blob-1"></div>
+<div class="bg-blob-2"></div>
+<!-- Header Section -->
+<div class="header-section">
+<div class="decorative-line"></div>
+<h2>Impact of Current Challenges</h2>
+<p class="subtitle">
+            Inefficient data management doesn't just waste time—it directly impacts institutional standing, funding, and growth.
+        </p>
+</div>
+<!-- Cards Grid -->
+<div class="cards-grid">
+<!-- Card 1: Compliance Risks -->
+<div class="impact-card">
+<i class="fas fa-arrow-up arrow-indicator transform rotate-45"></i>
+<div>
+<div class="icon-circle icon-compliance">
+<i class="fas fa-exclamation-triangle"></i>
+</div>
+<h3 class="card-title text-red-400">Compliance Risks</h3>
+<p class="metric-value">High Risk</p>
+<p class="card-desc">
+                    Inconsistent data leads to errors in NAAC, NIRF, and NBA submissions, risking accreditation status.
+                </p>
+</div>
+<div class="mt-4">
+<div class="flex justify-between text-xs text-gray-400 mb-1">
+<span>Error Probability</span>
+<span>High</span>
+</div>
+<div class="stat-bar-container">
+<div class="stat-bar-fill bar-red"></div>
+</div>
+</div>
+</div>
+<!-- Card 2: Ranking Drops -->
+<div class="impact-card">
+<i class="fas fa-arrow-down arrow-indicator text-red-500"></i>
+<div>
+<div class="icon-circle icon-ranking">
+<i class="fas fa-chart-line-down"></i>
+</div>
+<h3 class="card-title text-yellow-400">Ranking Impact</h3>
+<p class="metric-value">Decline</p>
+<p class="card-desc">
+                    Underreporting of quality research causes unnecessary drops in national and global institutional rankings.
+                </p>
+</div>
+<div class="mt-4">
+<div class="flex justify-between text-xs text-gray-400 mb-1">
+<span>Ranking Volatility</span>
+<span>Med-High</span>
+</div>
+<div class="stat-bar-container">
+<div class="stat-bar-fill bar-amber"></div>
+</div>
+</div>
+</div>
+<!-- Card 3: Credibility Issues -->
+<div class="impact-card">
+<i class="fas fa-users-slash arrow-indicator"></i>
+<div>
+<div class="icon-circle icon-credibility">
+<i class="fas fa-shield-alt"></i>
+</div>
+<h3 class="card-title text-purple-400">Credibility Loss</h3>
+<p class="metric-value">Trust Gap</p>
+<p class="card-desc">
+                    Data discrepancies question the integrity of reports, affecting faculty recognition and stakeholder trust.
+                </p>
+</div>
+<div class="mt-4">
+<div class="flex justify-between text-xs text-gray-400 mb-1">
+<span>Stakeholder Trust</span>
+<span>Low</span>
+</div>
+<div class="stat-bar-container">
+<div class="stat-bar-fill bar-purple"></div>
+</div>
+</div>
+</div>
+<!-- Card 4: Opportunity Costs -->
+<div class="impact-card">
+<i class="fas fa-hourglass-end arrow-indicator"></i>
+<div>
+<div class="icon-circle icon-opportunity">
+<i class="fas fa-search-dollar"></i>
+</div>
+<h3 class="card-title text-blue-400">Opportunity Cost</h3>
+<p class="metric-value">Lost Funding</p>
+<p class="card-desc">
+                    Slow decision-making due to lack of insights results in missed grant deadlines and funding opportunities.
+                </p>
+</div>
+<div class="mt-4">
+<div class="flex justify-between text-xs text-gray-400 mb-1">
+<span>Missed Opportunities</span>
+<span>High</span>
+</div>
+<div class="stat-bar-container">
+<div class="stat-bar-fill bar-blue"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Alert / Summary Footer -->
+<div class="alert-section">
+<div class="alert-text">
+<i class="fas fa-info-circle mr-3 text-xl"></i>
+<span>Critical Insight: Manual processes are not just slow—they actively damage institutional reputation.</span>
+</div>
+<div class="text-sm text-gray-400 font-mono">
+            IMPACT ANALYSIS
+        </div>
+</div>
+</div>
+</body>
+</html>

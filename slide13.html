@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Future Scope - RIMS</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Slate 900 */
+            color: white;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #0f172a;
+            overflow: hidden;
+            padding: 2rem 3rem;
+        }
+
+        /* Background Shapes */
+        .bg-blob-1 {
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 500px;
+            height: 500px;
+            background-color: #4f46e5; /* Indigo 600 */
+            border-radius: 50%;
+            opacity: 0.15;
+            filter: blur(80px);
+            z-index: 0;
+        }
+
+        .bg-blob-2 {
+            position: absolute;
+            bottom: -150px;
+            right: -100px;
+            width: 600px;
+            height: 600px;
+            background-color: #06b6d4; /* Cyan 500 */
+            border-radius: 50%;
+            opacity: 0.15;
+            filter: blur(90px);
+            z-index: 0;
+        }
+
+        /* Header */
+        .header-section {
+            z-index: 10;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #f8fafc;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Timeline Container */
+        .timeline-wrapper {
+            flex: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            width: 100%;
+            padding: 0 1rem;
+        }
+
+        /* Central Line */
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 2rem;
+            right: 2rem;
+            height: 4px;
+            background-color: rgba(51, 65, 85, 0.5); /* Slate 700 */
+            border-radius: 2px;
+            z-index: 1;
+        }
+
+        .timeline-progress {
+            position: absolute;
+            top: 50%;
+            left: 2rem;
+            width: 20%; /* Visual indicator of 'in progress' or starting */
+            height: 4px;
+            background-color: #3b82f6; /* Blue 500 */
+            border-radius: 2px;
+            z-index: 1;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Timeline Items Grid */
+        .timeline-items {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            width: 100%;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 2;
+            height: 100%;
+        }
+
+        /* Individual Item Wrapper */
+        .t-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 100%;
+        }
+
+        /* Alternating Positions */
+        /* Odd items (1, 3, 5) go UP */
+        .t-item:nth-child(odd) {
+            justify-content: flex-end;
+            padding-bottom: 50%; /* Push content up from center line */
+        }
+        
+        .t-item:nth-child(odd) .t-connector {
+            top: 100%; /* Connector goes down to line */
+            height: 50%; /* Reach center from content bottom */
+            background-image: linear-gradient(to bottom, rgba(148,163,184,0.3), rgba(148,163,184,0)); /* Gradient Fade */
+            border-left: 2px dashed rgba(148,163,184,0.3);
+            background: none;
+        }
+
+        .t-item:nth-child(odd) .t-node {
+            bottom: -28px; /* Position on the line */
+        }
+
+        /* Even items (2, 4, 6) go DOWN */
+        .t-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-top: 50%; /* Push content down from center line */
+        }
+
+        .t-item:nth-child(even) .t-connector {
+            bottom: 100%; /* Connector goes up to line */
+            height: 50%;
+            border-left: 2px dashed rgba(148,163,184,0.3);
+        }
+
+        .t-item:nth-child(even) .t-node {
+            top: -28px;
+        }
+
+        /* Connector Line Vertical */
+        .t-connector {
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            transform: translateX(-50%);
+        }
+
+        /* Center Node on Line */
+        .t-node {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background-color: #0f172a;
+            border: 3px solid #64748b;
+            border-radius: 50%;
+            z-index: 5;
+            transition: all 0.3s ease;
+        }
+
+        .t-item:hover .t-node {
+            background-color: white;
+            transform: translateX(-50%) scale(1.2);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Card Content */
+        .t-card {
+            background-color: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            border-radius: 12px;
+            padding: 1.25rem;
+            width: 180px;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .t-item:hover .t-card {
+            transform: scale(1.05);
+            background-color: rgba(30, 41, 59, 0.95);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+            z-index: 10;
+        }
+
+        /* Card Header Color Bar */
+        .t-card-bar {
+            position: absolute;
+            top: 0;
+            left: 12px;
+            right: 12px;
+            height: 3px;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .t-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            display: inline-block;
+        }
+
+        .t-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #f1f5f9;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .t-desc {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            line-height: 1.4;
+        }
+
+        /* Specific Colors */
+        /* 1. AI - Purple */
+        .theme-purple .t-node { border-color: #a855f7; }
+        .theme-purple .t-card-bar { background-color: #a855f7; }
+        .theme-purple .t-icon { color: #c084fc; }
+        .theme-purple:hover .t-node { background-color: #a855f7; }
+
+        /* 2. Integrations - Amber */
+        .theme-amber .t-node { border-color: #f59e0b; }
+        .theme-amber .t-card-bar { background-color: #f59e0b; }
+        .theme-amber .t-icon { color: #fbbf24; }
+        .theme-amber:hover .t-node { background-color: #f59e0b; }
+
+        /* 3. Mobile - Blue */
+        .theme-blue .t-node { border-color: #3b82f6; }
+        .theme-blue .t-card-bar { background-color: #3b82f6; }
+        .theme-blue .t-icon { color: #60a5fa; }
+        .theme-blue:hover .t-node { background-color: #3b82f6; }
+
+        /* 4. Security - Emerald */
+        .theme-emerald .t-node { border-color: #10b981; }
+        .theme-emerald .t-card-bar { background-color: #10b981; }
+        .theme-emerald .t-icon { color: #34d399; }
+        .theme-emerald:hover .t-node { background-color: #10b981; }
+
+        /* 5. Scalability - Cyan */
+        .theme-cyan .t-node { border-color: #06b6d4; }
+        .theme-cyan .t-card-bar { background-color: #06b6d4; }
+        .theme-cyan .t-icon { color: #22d3ee; }
+        .theme-cyan:hover .t-node { background-color: #06b6d4; }
+
+        /* 6. Reporting - Rose */
+        .theme-rose .t-node { border-color: #f43f5e; }
+        .theme-rose .t-card-bar { background-color: #f43f5e; }
+        .theme-rose .t-icon { color: #fb7185; }
+        .theme-rose:hover .t-node { background-color: #f43f5e; }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Elements -->
+<div class="bg-blob-1"></div>
+<div class="bg-blob-2"></div>
+<!-- Header -->
+<div class="header-section">
+<h2>Future Scope &amp; Roadmap</h2>
+<p class="subtitle">Evolving RIMS from a data management system into an intelligent, integrated, and scalable research ecosystem.</p>
+</div>
+<!-- Timeline -->
+<div class="timeline-wrapper">
+<!-- Line -->
+<div class="timeline-line"></div>
+<!-- Progress Indicator (optional, showing start) -->
+<!-- <div class="timeline-progress"></div> -->
+<div class="timeline-items">
+<!-- Item 1: Advanced AI (Top) -->
+<div class="t-item theme-purple">
+<div class="t-card">
+<div class="t-card-bar"></div>
+<i class="fas fa-brain t-icon"></i>
+<h3 class="t-title">Advanced AI Features</h3>
+<p class="t-desc">Journal recommendations, predictive analytics for funding, and auto-categorization.</p>
+</div>
+<div class="t-connector"></div>
+<div class="t-node"></div>
+</div>
+<!-- Item 2: Integrations (Bottom) -->
+<div class="t-item theme-amber">
+<div class="t-connector"></div>
+<div class="t-node"></div>
+<div class="t-card">
+<div class="t-card-bar"></div>
+<i class="fas fa-plug t-icon"></i>
+<h3 class="t-title">External Integrations</h3>
+<p class="t-desc">APIs for Scopus, ORCID, Crossref, and syncing with HRMS/ERP systems.</p>
+</div>
+</div>
+<!-- Item 3: Mobile App (Top) -->
+<div class="t-item theme-blue">
+<div class="t-card">
+<div class="t-card-bar"></div>
+<i class="fas fa-mobile-alt t-icon"></i>
+<h3 class="t-title">Mobile Application</h3>
+<p class="t-desc">Native app for on-the-go uploads, real-time notifications, and approvals.</p>
+</div>
+<div class="t-connector"></div>
+<div class="t-node"></div>
+</div>
+<!-- Item 4: Security (Bottom) -->
+<div class="t-item theme-emerald">
+<div class="t-connector"></div>
+<div class="t-node"></div>
+<div class="t-card">
+<div class="t-card-bar"></div>
+<i class="fas fa-shield-alt t-icon"></i>
+<h3 class="t-title">Enhanced Security</h3>
+<p class="t-desc">Two-factor authentication (2FA), advanced encryption, and detailed audit trails.</p>
+</div>
+</div>
+<!-- Item 5: Scalability (Top) -->
+<div class="t-item theme-cyan">
+<div class="t-card">
+<div class="t-card-bar"></div>
+<i class="fas fa-server t-icon"></i>
+<h3 class="t-title">Scalability &amp; Cloud</h3>
+<p class="t-desc">Microservices architecture, load balancing, and high-availability cloud deployment.</p>
+</div>
+<div class="t-connector"></div>
+<div class="t-node"></div>
+</div>
+<!-- Item 6: Reporting (Bottom) -->
+<div class="t-item theme-rose">
+<div class="t-connector"></div>
+<div class="t-node"></div>
+<div class="t-card">
+<div class="t-card-bar"></div>
+<i class="fas fa-chart-line t-icon"></i>
+<h3 class="t-title">Advanced Reporting</h3>
+<p class="t-desc">Custom report builder, department benchmarking tools, and Y-o-Y comparisons.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

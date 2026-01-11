@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Automation Capabilities - RIMS</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Slate 900 */
+            color: white;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #0f172a;
+            overflow: hidden;
+            padding: 2rem 4rem;
+        }
+
+        /* Background Shapes (Solid colors with blur, no gradients) */
+        .bg-blob-1 {
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 600px;
+            height: 600px;
+            background-color: #1e3a8a; /* Blue 900 */
+            border-radius: 50%;
+            opacity: 0.2;
+            filter: blur(80px);
+            z-index: 0;
+        }
+
+        .bg-blob-2 {
+            position: absolute;
+            bottom: -150px;
+            right: -100px;
+            width: 700px;
+            height: 700px;
+            background-color: #0f766e; /* Teal 700 */
+            border-radius: 50%;
+            opacity: 0.15;
+            filter: blur(90px);
+            z-index: 0;
+        }
+
+        /* Header */
+        .header-section {
+            z-index: 10;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #f8fafc;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Flow Container */
+        .flows-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            z-index: 10;
+            flex: 1;
+            justify-content: center;
+        }
+
+        /* Individual Flow Section */
+        .flow-section {
+            background-color: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            position: relative;
+            backdrop-filter: blur(8px);
+        }
+
+        .flow-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .flow-tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        /* Steps Layout */
+        .steps-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        /* Connecting Line */
+        .connect-line {
+            position: absolute;
+            top: 28px; /* Center vertically with icons (56px/2) */
+            left: 30px;
+            right: 30px;
+            height: 2px;
+            background-color: rgba(148, 163, 184, 0.15);
+            z-index: 0;
+            border-top: 2px dashed rgba(148, 163, 184, 0.3); /* Simulating dashed line */
+            background: none;
+        }
+
+        /* Step Item */
+        .step-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            position: relative;
+            z-index: 2;
+            width: 120px; /* Fixed width for alignment */
+        }
+
+        /* Icon Circle */
+        .step-icon-box {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.25rem;
+            background-color: #0f172a; /* Match body bg to hide line */
+            border: 2px solid;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        }
+
+        .step-item:hover .step-icon-box {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Step Text */
+        .step-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .step-sub {
+            font-size: 0.7rem;
+            color: #64748b;
+            text-align: center;
+            margin-top: 0.2rem;
+        }
+
+        /* Arrow Indicator between steps */
+        .step-arrow {
+            color: rgba(148, 163, 184, 0.4);
+            font-size: 1rem;
+            z-index: 1;
+            background-color: rgba(30, 41, 59, 0.4); /* background match */
+            padding: 0 0.5rem;
+            border-radius: 4px;
+        }
+
+        /* Theme Styles - DOI (Cyan/Blue) */
+        .theme-doi .flow-tag { background-color: rgba(6, 182, 212, 0.15); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.3); }
+        .theme-doi .step-icon-box { border-color: #0ea5e9; color: #38bdf8; background-color: rgba(15, 23, 42, 1); }
+        .theme-doi .step-item:hover .step-icon-box { background-color: rgba(14, 165, 233, 0.1); border-color: #7dd3fc; }
+        
+        /* Theme Styles - OCR (Purple/Pink) */
+        .theme-ocr .flow-tag { background-color: rgba(192, 132, 252, 0.15); color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.3); }
+        .theme-ocr .step-icon-box { border-color: #c084fc; color: #e879f9; background-color: rgba(15, 23, 42, 1); }
+        .theme-ocr .step-item:hover .step-icon-box { background-color: rgba(192, 132, 252, 0.1); border-color: #f0abfc; }
+
+        /* Confidence Highlight */
+        .ai-highlight .step-icon-box {
+            border-color: #facc15;
+            color: #facc15;
+            box-shadow: 0 0 15px rgba(250, 204, 21, 0.2);
+        }
+        .ai-highlight .step-label { color: #fef08a; }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Elements -->
+<div class="bg-blob-1"></div>
+<div class="bg-blob-2"></div>
+<!-- Header -->
+<div class="header-section">
+<h2>Automation Capabilities</h2>
+<p class="subtitle">Smart workflows that reduce manual data entry by up to 80% using API integrations and OCR technology.</p>
+</div>
+<!-- Content Wrapper -->
+<div class="flows-wrapper">
+<!-- Workflow 1: DOI Automation -->
+<div class="flow-section theme-doi">
+<div class="flow-title">
+<i class="fas fa-magic text-cyan-400"></i>
+                    DOI Metadata Automation
+                    <span class="flow-tag ml-3">API Driven</span>
+</div>
+<div class="steps-container">
+<div class="connect-line"></div>
+<!-- Step 1 -->
+<div class="step-item">
+<div class="step-icon-box"><i class="fas fa-keyboard"></i></div>
+<div class="step-label">Enter DOI</div>
+<div class="step-sub">Input ID</div>
+</div>
+<div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+<!-- Step 2 -->
+<div class="step-item">
+<div class="step-icon-box"><i class="fas fa-cloud-download-alt"></i></div>
+<div class="step-label">Fetch Metadata</div>
+<div class="step-sub">Crossref API</div>
+</div>
+<div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+<!-- Step 3 -->
+<div class="step-item">
+<div class="step-icon-box"><i class="fas fa-user-friends"></i></div>
+<div class="step-label">Auto-Link</div>
+<div class="step-sub">Match Authors</div>
+</div>
+<div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+<!-- Step 4 -->
+<div class="step-item">
+<div class="step-icon-box"><i class="fas fa-clipboard-check"></i></div>
+<div class="step-label">Verify</div>
+<div class="step-sub">User Review</div>
+</div>
+<div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+<!-- Step 5 -->
+<div class="step-item">
+<div class="step-icon-box"><i class="fas fa-save"></i></div>
+<div class="step-label">Save</div>
+<div class="step-sub">To Database</div>
+</div>
+</div>
+</div>
+<!-- Workflow 2: OCR Awards -->
+<div class="flow-section theme-ocr">
+<div class="flow-title">
+<i class="fas fa-eye text-purple-400"></i>
+                    OCR Certificate Processing
+                    <span class="flow-tag ml-3">AI Powered</span>
+</div>
+<div class="steps-container">
+<div class="connect-line"></div>
+<!-- Step 1 -->
+<div class="step-item">
+<div class="step-icon-box"><i class="fas fa-file-upload"></i></div>
+<div class="step-label">Upload</div>
+<div class="step-sub">PDF/Image</div>
+</div>
+<div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+<!-- Step 2 -->
+<div class="step-item">
+<div class="step-icon-box"><i class="fas fa-shield-alt"></i></div>
+<div class="step-label">Validate</div>
+<div class="step-sub">Virus Scan</div>
+</div>
+<div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+<!-- Step 3 -->
+<div class="step-item">
+<div class="step-icon-box"><i class="fas fa-expand"></i></div>
+<div class="step-label">Extract</div>
+<div class="step-sub">OCR Engine</div>
+</div>
+<div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+<!-- Step 4 -->
+<div class="step-item">
+<div class="step-icon-box"><i class="fas fa-code"></i></div>
+<div class="step-label">Parse</div>
+<div class="step-sub">Identify Fields</div>
+</div>
+<div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+<!-- Step 5 (AI Highlight) -->
+<div class="step-item ai-highlight">
+<div class="step-icon-box"><i class="fas fa-wand-magic-sparkles"></i></div>
+<div class="step-label">Autofill</div>
+<div class="step-sub">High Confidence</div>
+</div>
+<div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+<!-- Step 6 -->
+<div class="step-item">
+<div class="step-icon-box"><i class="fas fa-user-check"></i></div>
+<div class="step-label">Verify</div>
+<div class="step-sub">Manual Check</div>
+</div>
+<div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+<!-- Step 7 -->
+<div class="step-item">
+<div class="step-icon-box"><i class="fas fa-paper-plane"></i></div>
+<div class="step-label">Submit</div>
+<div class="step-sub">Publish Record</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboards &amp; Analytics - RIMS</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Slate 900 */
+            color: white;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #0f172a;
+            overflow: hidden;
+            padding: 1.5rem 2.5rem;
+        }
+
+        /* Background Effects */
+        .bg-blob-1 {
+            position: absolute;
+            top: -100px;
+            right: 20%;
+            width: 600px;
+            height: 600px;
+            background-color: #1e3a8a; /* Blue 900 */
+            border-radius: 50%;
+            opacity: 0.2;
+            filter: blur(80px);
+            z-index: 0;
+        }
+
+        .bg-blob-2 {
+            position: absolute;
+            bottom: -100px;
+            left: 10%;
+            width: 500px;
+            height: 500px;
+            background-color: #0f766e; /* Teal 700 */
+            border-radius: 50%;
+            opacity: 0.15;
+            filter: blur(70px);
+            z-index: 0;
+        }
+
+        /* Header */
+        .header-section {
+            z-index: 10;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #f8fafc;
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            margin-top: 0.25rem;
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            color: #34d399;
+            font-weight: 600;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #34d399;
+            border-radius: 50%;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-rows: auto 1fr 1fr;
+            gap: 1rem;
+            z-index: 10;
+            flex: 1;
+            height: 100%;
+        }
+
+        /* KPI Row */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            height: 90px;
+        }
+
+        .kpi-card {
+            background-color: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .kpi-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .kpi-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .kpi-value {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            line-height: 1;
+        }
+
+        .kpi-label {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Chart Rows */
+        .chart-row {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .row-top {
+            grid-template-columns: 1.5fr 1fr;
+            height: 240px;
+        }
+
+        .row-bottom {
+            grid-template-columns: 1fr 1fr 1fr;
+            height: 200px;
+        }
+
+        .chart-card {
+            background-color: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+
+        .chart-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chart-container {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            min-height: 0; /* Important for flex child resizing */
+        }
+
+        /* Colors */
+        .bg-blue-soft { background-color: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+        .bg-cyan-soft { background-color: rgba(6, 182, 212, 0.15); color: #22d3ee; }
+        .bg-purple-soft { background-color: rgba(168, 85, 247, 0.15); color: #c084fc; }
+        .bg-emerald-soft { background-color: rgba(16, 185, 129, 0.15); color: #34d399; }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background -->
+<div class="bg-blob-1"></div>
+<div class="bg-blob-2"></div>
+<!-- Header -->
+<div class="header-section">
+<div>
+<h2>Dashboards &amp; Analytics</h2>
+<p class="subtitle">Real-time institutional performance monitoring and compliance tracking.</p>
+</div>
+<div class="live-indicator">
+<div class="dot"></div>
+                LIVE METRICS
+            </div>
+</div>
+<!-- Main Grid -->
+<div class="dashboard-grid">
+<!-- KPI Row -->
+<div class="kpi-row">
+<div class="kpi-card">
+<div class="kpi-icon bg-blue-soft"><i class="fas fa-book-open"></i></div>
+<div class="kpi-content">
+<span class="kpi-value">1,248</span>
+<span class="kpi-label">Total Publications</span>
+</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-icon bg-cyan-soft"><i class="fas fa-quote-right"></i></div>
+<div class="kpi-content">
+<span class="kpi-value">8,560</span>
+<span class="kpi-label">Total Citations</span>
+</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-icon bg-emerald-soft"><i class="fas fa-hand-holding-usd"></i></div>
+<div class="kpi-content">
+<span class="kpi-value">$2.4M</span>
+<span class="kpi-label">Research Funding</span>
+</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-icon bg-purple-soft"><i class="fas fa-award"></i></div>
+<div class="kpi-content">
+<span class="kpi-value">142</span>
+<span class="kpi-label">Awards &amp; Honors</span>
+</div>
+</div>
+</div>
+<!-- Top Chart Row -->
+<div class="chart-row row-top">
+<div class="chart-card">
+<div class="chart-title">
+                        Publication &amp; Citation Trend (5 Years)
+                        <i class="fas fa-ellipsis-h text-gray-500 text-xs"></i>
+</div>
+<div class="chart-container" id="chart-trend"></div>
+</div>
+<div class="chart-card">
+<div class="chart-title">
+                        SDG Contribution Mapping
+                        <i class="fas fa-globe-americas text-gray-500 text-xs"></i>
+</div>
+<div class="chart-container" id="chart-sdg"></div>
+</div>
+</div>
+<!-- Bottom Chart Row -->
+<div class="chart-row row-bottom">
+<div class="chart-card">
+<div class="chart-title">Journal Quartiles (Q1-Q4)</div>
+<div class="chart-container" id="chart-quartile"></div>
+</div>
+<div class="chart-card">
+<div class="chart-title">Funding Growth</div>
+<div class="chart-container" id="chart-funding"></div>
+</div>
+<div class="chart-card">
+<div class="chart-title">Benchmarking (vs Peers)</div>
+<div class="chart-container" id="chart-radar"></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+        // Common styles
+        const textColor = '#94a3b8';
+        const axisColor = '#334155';
+        
+        // 1. Trend Chart (Bar + Line)
+        const trendChart = echarts.init(document.getElementById('chart-trend'));
+        const trendOption = {
+            tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+            legend: { textStyle: { color: textColor }, bottom: 0 },
+            grid: { left: '3%', right: '3%', bottom: '15%', top: '10%', containLabel: true },
+            xAxis: { 
+                type: 'category', 
+                data: ['2021', '2022', '2023', '2024', '2025'],
+                axisLine: { lineStyle: { color: axisColor } },
+                axisLabel: { color: textColor }
+            },
+            yAxis: [
+                { type: 'value', name: 'Pubs', axisLabel: { color: textColor }, splitLine: { lineStyle: { color: 'rgba(255,255,255,0.05)' } } },
+                { type: 'value', name: 'Cites', axisLabel: { color: textColor }, splitLine: { show: false } }
+            ],
+            series: [
+                { name: 'Publications', type: 'bar', barWidth: 20, itemStyle: { color: '#3b82f6', borderRadius: [4, 4, 0, 0] }, data: [150, 230, 224, 218, 305] },
+                { name: 'Citations', type: 'line', yAxisIndex: 1, smooth: true, itemStyle: { color: '#22d3ee' }, areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0, color: 'rgba(34, 211, 238, 0.3)'}, {offset: 1, color: 'rgba(34, 211, 238, 0)'}]) }, data: [450, 890, 1100, 1350, 1800] }
+            ]
+        };
+        trendChart.setOption(trendOption);
+
+        // 2. SDG Chart (Nightingale Pie)
+        const sdgChart = echarts.init(document.getElementById('chart-sdg'));
+        const sdgOption = {
+            tooltip: { trigger: 'item' },
+            legend: { type: 'scroll', orient: 'vertical', right: 0, top: 'center', textStyle: { color: textColor, fontSize: 10 } },
+            series: [
+                {
+                    name: 'SDG Goals',
+                    type: 'pie',
+                    radius: [15, 70],
+                    center: ['35%', '50%'],
+                    roseType: 'area',
+                    itemStyle: { borderRadius: 4 },
+                    label: { show: false },
+                    data: [
+                        { value: 40, name: 'SDG 3: Health', itemStyle: { color: '#4ade80' } },
+                        { value: 32, name: 'SDG 4: Education', itemStyle: { color: '#f87171' } },
+                        { value: 28, name: 'SDG 9: Industry', itemStyle: { color: '#fbbf24' } },
+                        { value: 24, name: 'SDG 7: Energy', itemStyle: { color: '#facc15' } },
+                        { value: 20, name: 'SDG 13: Climate', itemStyle: { color: '#22d3ee' } },
+                        { value: 16, name: 'SDG 5: Gender', itemStyle: { color: '#f472b6' } }
+                    ]
+                }
+            ]
+        };
+        sdgChart.setOption(sdgOption);
+
+        // 3. Quartile Chart (Doughnut)
+        const quartileChart = echarts.init(document.getElementById('chart-quartile'));
+        const quartileOption = {
+            tooltip: { trigger: 'item' },
+            legend: { bottom: 0, textStyle: { color: textColor, fontSize: 10 }, icon: 'circle' },
+            series: [
+                {
+                    name: 'Journal Quartiles',
+                    type: 'pie',
+                    radius: ['45%', '70%'],
+                    center: ['50%', '45%'],
+                    itemStyle: { borderRadius: 5, borderColor: '#0f172a', borderWidth: 2 },
+                    label: { show: true, position: 'center', formatter: 'Q1\n45%', fontSize: 16, fontWeight: 'bold', color: '#fff' },
+                    labelLine: { show: false },
+                    data: [
+                        { value: 45, name: 'Q1', itemStyle: { color: '#818cf8' } },
+                        { value: 30, name: 'Q2', itemStyle: { color: '#60a5fa' }, label: { show: false } },
+                        { value: 15, name: 'Q3', itemStyle: { color: '#94a3b8' }, label: { show: false } },
+                        { value: 10, name: 'Q4', itemStyle: { color: '#475569' }, label: { show: false } }
+                    ]
+                }
+            ]
+        };
+        quartileChart.setOption(quartileOption);
+
+        // 4. Funding Growth (Line Area)
+        const fundingChart = echarts.init(document.getElementById('chart-funding'));
+        const fundingOption = {
+            tooltip: { trigger: 'axis' },
+            grid: { top: '15%', bottom: '20%', left: '10%', right: '5%' },
+            xAxis: { type: 'category', boundaryGap: false, data: ['Q1', 'Q2', 'Q3', 'Q4'], axisLine: { lineStyle: { color: axisColor } }, axisLabel: { color: textColor } },
+            yAxis: { type: 'value', splitLine: { show: false }, axisLabel: { show: false } },
+            series: [
+                {
+                    data: [820, 932, 1290, 1850],
+                    type: 'line',
+                    smooth: true,
+                    showSymbol: false,
+                    lineStyle: { width: 3, color: '#10b981' },
+                    areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{offset: 0, color: 'rgba(16, 185, 129, 0.4)'}, {offset: 1, color: 'rgba(16, 185, 129, 0)'}]) }
+                }
+            ]
+        };
+        fundingChart.setOption(fundingOption);
+
+        // 5. Radar Chart (Benchmarking)
+        const radarChart = echarts.init(document.getElementById('chart-radar'));
+        const radarOption = {
+            radar: {
+                indicator: [
+                    { name: 'Citations', max: 6500 },
+                    { name: 'Pubs', max: 16000 },
+                    { name: 'Intl Collab', max: 30000 },
+                    { name: 'Funding', max: 38000 },
+                    { name: 'Patents', max: 52000 }
+                ],
+                radius: '65%',
+                splitNumber: 4,
+                axisName: { color: textColor, fontSize: 10 },
+                splitArea: { areaStyle: { color: ['rgba(30, 41, 59, 0.9)', 'rgba(30, 41, 59, 0.6)', 'rgba(30, 41, 59, 0.3)', 'rgba(30, 41, 59, 0.1)'], shadowColor: 'rgba(0, 0, 0, 0.2)', shadowBlur: 10 } },
+                splitLine: { lineStyle: { color: 'rgba(255, 255, 255, 0.05)' } }
+            },
+            series: [
+                {
+                    type: 'radar',
+                    data: [
+                        {
+                            value: [5200, 14000, 26000, 32000, 42000],
+                            name: 'Our Inst.',
+                            itemStyle: { color: '#c084fc' },
+                            areaStyle: { color: 'rgba(192, 132, 252, 0.4)' }
+                        },
+                        {
+                            value: [4300, 10000, 22000, 21000, 35000],
+                            name: 'Avg Peer',
+                            itemStyle: { color: '#94a3b8' },
+                            lineStyle: { type: 'dashed' },
+                            areaStyle: { color: 'transparent' }
+                        }
+                    ]
+                }
+            ]
+        };
+        radarChart.setOption(radarOption);
+
+        // Resize listener
+        window.addEventListener('resize', () => {
+            trendChart.resize();
+            sdgChart.resize();
+            quartileChart.resize();
+            fundingChart.resize();
+            radarChart.resize();
+        });
+    </script>
+</body>
+</html>

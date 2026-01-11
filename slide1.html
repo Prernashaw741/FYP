@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RIMS FYP Presentation Title Slide</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: #0f172a; /* Slate 900 */
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        
+        /* Decorative Shapes to simulate depth without CSS gradients */
+        .shape-1 {
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background-color: #1e293b; /* Slate 800 */
+            border-radius: 50%;
+            opacity: 0.5;
+            z-index: 1;
+        }
+        
+        .shape-2 {
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 400px;
+            height: 400px;
+            background-color: #1e3a8a; /* Blue 900 */
+            border-radius: 50%;
+            opacity: 0.3;
+            z-index: 1;
+        }
+        
+        .shape-3 {
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            background-color: #06b6d4; /* Cyan 500 */
+            border-radius: 50%;
+            opacity: 0.8;
+            z-index: 2;
+        }
+
+        .shape-4 {
+            position: absolute;
+            bottom: 30%;
+            right: 15%;
+            width: 15px;
+            height: 15px;
+            background-color: #3b82f6; /* Blue 500 */
+            border-radius: 50%;
+            opacity: 0.8;
+            z-index: 2;
+        }
+
+        .content-wrapper {
+            z-index: 10;
+            width: 85%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            justify-content: center;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .tagline-bar {
+            width: 80px;
+            height: 4px;
+            background-color: #06b6d4;
+            margin: 2rem auto;
+            border-radius: 2px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            width: 100%;
+            margin-top: 4rem;
+            text-align: left;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+        }
+
+        .detail-item p {
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .detail-label {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .detail-value {
+            color: #ffffff;
+            font-size: 1.125rem;
+            font-weight: 500;
+        }
+        
+        .tech-badge {
+            background-color: rgba(6, 182, 212, 0.1);
+            color: #22d3ee;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Abstract Background Shapes -->
+<div class="shape-1"></div>
+<div class="shape-2"></div>
+<div class="shape-3"></div>
+<div class="shape-4"></div>
+<div class="content-wrapper">
+<!-- Project Badge -->
+<div class="tech-badge">
+<i class="fas fa-network-wired"></i>
+                FINAL YEAR PROJECT
+            </div>
+<!-- Main Title -->
+<h1 class="text-6xl font-extrabold text-white mb-4 tracking-tight">
+                Research Information <br/>
+                Management System <span class="text-cyan-400">(RIMS)</span>
+</h1>
+<!-- Tagline -->
+<div class="tagline-bar"></div>
+<p class="text-2xl text-gray-300 font-light max-w-4xl mx-auto">
+                Automating research data, compliance, and institutional insights <br/>
+                through an AI-driven centralized platform.
+            </p>
+<!-- Student & Institutional Details -->
+<div class="details-grid">
+<!-- Column 1: Student Info -->
+<div class="detail-item">
+<p class="detail-label"><i class="fas fa-user-graduate mr-2"></i>Presented By</p>
+<p class="detail-value">[Student Name Placeholder]</p>
+<p class="text-gray-400 text-sm mt-1">Roll No: [ID Placeholder]</p>
+</div>
+<!-- Column 2: Guide Info -->
+<div class="detail-item border-l border-gray-700 pl-8">
+<p class="detail-label"><i class="fas fa-chalkboard-teacher mr-2"></i>Guided By</p>
+<p class="detail-value">[Guide Name Placeholder]</p>
+<p class="text-gray-400 text-sm mt-1">[Designation]</p>
+</div>
+<!-- Column 3: Department Info -->
+<div class="detail-item border-l border-gray-700 pl-8">
+<p class="detail-label"><i class="fas fa-university mr-2"></i>Department &amp; Institution</p>
+<p class="detail-value">[Department Name]</p>
+<p class="text-gray-400 text-sm mt-1">[College/University Name]</p>
+<p class="text-gray-500 text-xs mt-2"><i class="far fa-calendar-alt mr-1"></i> [Date Placeholder]</p>
+</div>
+</div>
+</div>
+<!-- Footer Accent -->
+<div class="absolute bottom-0 w-full h-2 bg-cyan-500"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Thank You - RIMS</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Slate 900 */
+            color: white;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #0f172a;
+            overflow: hidden;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Abstract Background Elements */
+        .bg-blob-1 {
+            position: absolute;
+            top: -150px;
+            left: -150px;
+            width: 700px;
+            height: 700px;
+            background-color: #1e3a8a; /* Blue 900 */
+            border-radius: 50%;
+            opacity: 0.25;
+            filter: blur(100px);
+            z-index: 0;
+        }
+
+        .bg-blob-2 {
+            position: absolute;
+            bottom: -150px;
+            right: -150px;
+            width: 700px;
+            height: 700px;
+            background-color: #0f766e; /* Teal 700 */
+            border-radius: 50%;
+            opacity: 0.2;
+            filter: blur(100px);
+            z-index: 0;
+        }
+
+        .bg-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bg-circle-2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px;
+            height: 700px;
+            border: 1px dashed rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Content Wrapper */
+        .content-wrapper {
+            z-index: 10;
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 5.5rem;
+            font-weight: 800;
+            color: #f8fafc;
+            margin: 0;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .highlight {
+            color: #22d3ee; /* Cyan 400 */
+        }
+
+        .subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #94a3b8;
+            margin-top: 1rem;
+            margin-bottom: 3.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Acknowledgments Card */
+        .ack-card {
+            background-color: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 20px;
+            padding: 2rem 3rem;
+            width: 100%;
+            margin-bottom: 3.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        .ack-title {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .ack-grid {
+            display: grid;
+            grid-template-columns: 1fr 1px 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .divider {
+            height: 60px;
+            background-color: rgba(148, 163, 184, 0.2);
+        }
+
+        .ack-person h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin: 0 0 0.25rem 0;
+        }
+
+        .ack-person p {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            margin: 0;
+        }
+
+        .ack-role {
+            font-size: 0.75rem;
+            color: #22d3ee;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+
+        /* Contact Section */
+        .contact-row {
+            display: flex;
+            gap: 3rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #cbd5e1;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            background-color: rgba(15, 23, 42, 0.4);
+            border: 1px solid transparent;
+        }
+
+        .contact-item:hover {
+            background-color: rgba(30, 41, 59, 0.8);
+            border-color: rgba(56, 189, 248, 0.3);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .icon-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(56, 189, 248, 0.1);
+            color: #38bdf8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        /* Q&A Tag */
+        .qa-badge {
+            position: absolute;
+            top: 3rem;
+            right: 3rem;
+            background-color: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #34d399;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #34d399;
+            border-radius: 50%;
+            box-shadow: 0 0 0 rgba(52, 211, 153, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(52, 211, 153, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+        }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Elements -->
+<div class="bg-blob-1"></div>
+<div class="bg-blob-2"></div>
+<div class="bg-circle"></div>
+<div class="bg-circle-2"></div>
+<!-- Q&A Badge -->
+<div class="qa-badge">
+<div class="pulse-dot"></div>
+            Q&amp;A Session Open
+        </div>
+<!-- Main Content -->
+<div class="content-wrapper">
+<!-- Title -->
+<h1>Thank <span class="highlight">You</span></h1>
+<p class="subtitle">Questions &amp; Discussions</p>
+<!-- Acknowledgments -->
+<div class="ack-card">
+<p class="ack-title">Project Acknowledgments</p>
+<div class="ack-grid">
+<!-- Guide -->
+<div class="ack-person text-right">
+<span class="ack-role">Project Guide</span>
+<h3>[Guide Name]</h3>
+<p>Department of Computer Science</p>
+</div>
+<!-- Divider -->
+<div class="divider"></div>
+<!-- Institution -->
+<div class="ack-person text-left">
+<span class="ack-role">Institution</span>
+<h3>[College/University Name]</h3>
+<p>2026 Academic Year</p>
+</div>
+</div>
+</div>
+<!-- Contact Info -->
+<div class="contact-row">
+<div class="contact-item">
+<div class="icon-circle">
+<i class="fas fa-envelope"></i>
+</div>
+<span>student.email@college.edu</span>
+</div>
+<div class="contact-item">
+<div class="icon-circle">
+<i class="fab fa-linkedin-in"></i>
+</div>
+<span>linkedin.com/in/student</span>
+</div>
+<div class="contact-item">
+<div class="icon-circle">
+<i class="fas fa-globe"></i>
+</div>
+<span>github.com/rims-project</span>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

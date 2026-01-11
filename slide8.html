@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Technology Stack - RIMS</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Slate 900 */
+            color: white;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #0f172a;
+            overflow: hidden;
+            padding: 2rem 4rem;
+        }
+
+        /* Background Shapes (Solid colors with blur, no gradients) */
+        .bg-shape-1 {
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 600px;
+            height: 600px;
+            background-color: #1e3a8a; /* Blue 900 */
+            border-radius: 50%;
+            opacity: 0.2;
+            filter: blur(80px);
+            z-index: 0;
+        }
+
+        .bg-shape-2 {
+            position: absolute;
+            bottom: -200px;
+            left: -100px;
+            width: 700px;
+            height: 700px;
+            background-color: #0f172a; /* Slate 900 base */
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .bg-shape-3 {
+            position: absolute;
+            bottom: 50px;
+            left: 50px;
+            width: 300px;
+            height: 300px;
+            background-color: #0e7490; /* Cyan 700 */
+            border-radius: 50%;
+            opacity: 0.1;
+            filter: blur(60px);
+            z-index: 0;
+        }
+
+        /* Header */
+        .header-section {
+            z-index: 10;
+            margin-bottom: 2rem;
+            flex-shrink: 0;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #f8fafc;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #94a3b8;
+        }
+
+        /* Stack Container */
+        .stack-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            z-index: 10;
+            flex: 1;
+            justify-content: center;
+        }
+
+        /* Individual Band */
+        .tech-band {
+            display: flex;
+            align-items: center;
+            background-color: rgba(30, 41, 59, 0.6); /* Slate 800 transparent */
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 12px;
+            padding: 0.85rem 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+
+        .tech-band:hover {
+            transform: translateX(10px);
+            background-color: rgba(30, 41, 59, 0.9);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Left side accent bar */
+        .band-accent {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+        }
+
+        /* Icon Area */
+        .icon-area {
+            display: flex;
+            align-items: center;
+            width: 280px;
+            flex-shrink: 0;
+            gap: 1rem;
+        }
+
+        .band-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+
+        .band-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #f1f5f9;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding-left: 2rem;
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .tech-tag {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .tech-desc {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-left: auto;
+            font-style: italic;
+        }
+
+        /* Specific Colors */
+        /* Architecture - Cyan */
+        .acc-cyan { background-color: #06b6d4; }
+        .icon-cyan { background-color: rgba(6, 182, 212, 0.15); color: #22d3ee; }
+        
+        /* Data - Blue */
+        .acc-blue { background-color: #3b82f6; }
+        .icon-blue { background-color: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+        
+        /* Modeling - Purple */
+        .acc-purple { background-color: #a855f7; }
+        .icon-purple { background-color: rgba(168, 85, 247, 0.15); color: #c084fc; }
+
+        /* Automation - Pink */
+        .acc-pink { background-color: #ec4899; }
+        .icon-pink { background-color: rgba(236, 72, 153, 0.15); color: #f472b6; }
+
+        /* Integrations - Amber */
+        .acc-amber { background-color: #f59e0b; }
+        .icon-amber { background-color: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+
+        /* Security - Emerald */
+        .acc-emerald { background-color: #10b981; }
+        .icon-emerald { background-color: rgba(16, 185, 129, 0.15); color: #34d399; }
+
+        /* Deployment - Indigo */
+        .acc-indigo { background-color: #6366f1; }
+        .icon-indigo { background-color: rgba(99, 102, 241, 0.15); color: #818cf8; }
+
+        /* Tech Flow Indicator (Dotted Line) */
+        .flow-line {
+            position: absolute;
+            left: 60px; /* Aligned with icon centers roughly */
+            top: 140px;
+            bottom: 60px;
+            width: 2px;
+            background-image: repeating-linear-gradient(to bottom, rgba(255,255,255,0.1) 0, rgba(255,255,255,0.1) 6px, transparent 6px, transparent 12px); /* CSS gradient used only for dotted line pattern, safe for most exports, otherwise use border-left dashed */
+            background: none;
+            border-left: 2px dashed rgba(255, 255, 255, 0.1);
+            z-index: 5;
+        }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Elements -->
+<div class="bg-shape-1"></div>
+<div class="bg-shape-2"></div>
+<div class="bg-shape-3"></div>
+<!-- Header -->
+<div class="header-section">
+<h2>Technology Stack &amp; Modeling</h2>
+<p class="subtitle">A robust, scalable architecture powered by modern development practices and rigorous system design.</p>
+</div>
+<!-- Flow Line Indicator -->
+<div class="flow-line"></div>
+<!-- Stack Bands -->
+<div class="stack-container">
+<!-- Band 1: Architecture -->
+<div class="tech-band">
+<div class="band-accent acc-cyan"></div>
+<div class="icon-area">
+<div class="band-icon icon-cyan"><i class="fas fa-layer-group"></i></div>
+<div class="band-title">Architecture</div>
+</div>
+<div class="content-area">
+<p class="tech-tag">Modular Web App</p>
+<p class="tech-tag">RESTful APIs</p>
+<p class="tech-desc">Decoupled frontend &amp; backend services</p>
+</div>
+</div>
+<!-- Band 2: Modeling -->
+<div class="tech-band">
+<div class="band-accent acc-purple"></div>
+<div class="icon-area">
+<div class="band-icon icon-purple"><i class="fas fa-project-diagram"></i></div>
+<div class="band-title">Modeling</div>
+</div>
+<div class="content-area">
+<p class="tech-tag">UML Class Diagrams</p>
+<p class="tech-tag">State Charts</p>
+<p class="tech-tag">Activity Diagrams</p>
+<p class="tech-desc">Standardized system design</p>
+</div>
+</div>
+<!-- Band 3: Data Layer -->
+<div class="tech-band">
+<div class="band-accent acc-blue"></div>
+<div class="icon-area">
+<div class="band-icon icon-blue"><i class="fas fa-database"></i></div>
+<div class="band-title">Data Layer</div>
+</div>
+<div class="content-area">
+<p class="tech-tag">Relational Database</p>
+<p class="tech-tag">ER Models</p>
+<p class="tech-tag">File Store</p>
+<p class="tech-desc">Structured ACID-compliant storage</p>
+</div>
+</div>
+<!-- Band 4: Automation -->
+<div class="tech-band">
+<div class="band-accent acc-pink"></div>
+<div class="icon-area">
+<div class="band-icon icon-pink"><i class="fas fa-robot"></i></div>
+<div class="band-title">Automation</div>
+</div>
+<div class="content-area">
+<p class="tech-tag">OCR Pipeline</p>
+<p class="tech-tag">Metadata Bots</p>
+<p class="tech-tag">Confidence Scoring</p>
+<p class="tech-desc">AI-driven processing &amp; validation</p>
+</div>
+</div>
+<!-- Band 5: Integrations -->
+<div class="tech-band">
+<div class="band-accent acc-amber"></div>
+<div class="icon-area">
+<div class="band-icon icon-amber"><i class="fas fa-plug"></i></div>
+<div class="band-title">Integrations</div>
+</div>
+<div class="content-area">
+<p class="tech-tag">Crossref API</p>
+<p class="tech-tag">Scopus (Future)</p>
+<p class="tech-tag">ORCID (Future)</p>
+<p class="tech-desc">Seamless external connectivity</p>
+</div>
+</div>
+<!-- Band 6: Security -->
+<div class="tech-band">
+<div class="band-accent acc-emerald"></div>
+<div class="icon-area">
+<div class="band-icon icon-emerald"><i class="fas fa-shield-alt"></i></div>
+<div class="band-title">Security</div>
+</div>
+<div class="content-area">
+<p class="tech-tag">RBAC</p>
+<p class="tech-tag">Input Validation</p>
+<p class="tech-tag">Audit Logs</p>
+<p class="tech-desc">Role-based access control &amp; tracking</p>
+</div>
+</div>
+<!-- Band 7: Deployment -->
+<div class="tech-band">
+<div class="band-accent acc-indigo"></div>
+<div class="icon-area">
+<div class="band-icon icon-indigo"><i class="fas fa-cloud-upload-alt"></i></div>
+<div class="band-title">Deployment</div>
+</div>
+<div class="content-area">
+<p class="tech-tag">Cloud-Ready</p>
+<p class="tech-tag">Scalable</p>
+<p class="tech-tag">Docker Ready</p>
+<p class="tech-desc">High availability architecture</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

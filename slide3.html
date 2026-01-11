@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Key Pain Points - RIMS</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Slate 900 */
+            color: white;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            background-color: #0f172a;
+            overflow: hidden;
+        }
+
+        /* Abstract Background Elements */
+        .bg-shape-1 {
+            position: absolute;
+            top: -150px;
+            right: -100px;
+            width: 600px;
+            height: 600px;
+            background-color: #1e293b;
+            border-radius: 50%;
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        .bg-shape-2 {
+            position: absolute;
+            bottom: -200px;
+            left: -100px;
+            width: 500px;
+            height: 500px;
+            background-color: #0f172a;
+            border: 2px solid rgba(6, 182, 212, 0.1); /* Cyan border */
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        /* Layout Grid */
+        .main-content {
+            display: grid;
+            grid-template-columns: 35% 65%;
+            width: 100%;
+            height: 100%;
+            padding: 3rem 4rem;
+            z-index: 10;
+        }
+
+        /* Left Column Styles */
+        .left-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-right: 2rem;
+            border-right: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: #f8fafc;
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .highlight-text {
+            color: #22d3ee; /* Cyan 400 */
+        }
+
+        /* Right Column Styles - The List */
+        .right-col {
+            padding-left: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .pain-point-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            background: rgba(30, 41, 59, 0.4); /* Slate 800 transparent */
+            padding: 1.25rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .pain-point-item:hover {
+            background: rgba(30, 41, 59, 0.8);
+            transform: translateX(10px);
+            border-color: rgba(34, 211, 238, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1.25rem;
+            flex-shrink: 0;
+            font-size: 1.25rem;
+        }
+
+        /* Icon Variants */
+        .icon-manual { background: rgba(244, 63, 94, 0.1); color: #f43f5e; } /* Rose */
+        .icon-admin { background: rgba(245, 158, 11, 0.1); color: #f59e0b; } /* Amber */
+        .icon-time { background: rgba(168, 85, 247, 0.1); color: #a855f7; } /* Purple */
+        .icon-data { background: rgba(59, 130, 246, 0.1); color: #3b82f6; } /* Blue */
+        .icon-impact { background: rgba(100, 116, 139, 0.1); color: #94a3b8; } /* Slate */
+
+        .content-box {
+            flex: 1;
+        }
+
+        .item-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #e2e8f0;
+            margin-bottom: 0.25rem;
+        }
+
+        .item-desc {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.4;
+        }
+
+        /* Decorative Number */
+        .bg-number {
+            position: absolute;
+            bottom: -20px;
+            right: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.03);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Elements -->
+<div class="bg-shape-1"></div>
+<div class="bg-shape-2"></div>
+<div class="bg-number">03</div>
+<div class="main-content">
+<!-- Left Panel -->
+<div class="left-col">
+<div class="mb-4">
+<span class="px-3 py-1 bg-cyan-900 bg-opacity-30 text-cyan-400 text-xs font-bold uppercase tracking-wider rounded-full border border-cyan-800">Current Challenges</span>
+</div>
+<h2>
+                Key <span class="highlight-text">Pain</span><br/>
+                Points
+            </h2>
+<p class="subtitle">
+                The traditional approach to research management creates friction at every level, from individual faculty to institutional leadership.
+            </p>
+<div class="mt-8 p-6 bg-slate-800 bg-opacity-50 rounded-xl border border-slate-700 backdrop-filter backdrop-blur-sm">
+<div class="flex items-center mb-2">
+<i class="fas fa-exclamation-circle text-red-400 mr-3 text-xl"></i>
+<span class="text-white font-semibold">The Core Issue</span>
+</div>
+<p class="text-sm text-gray-400">
+                    Disjointed systems lead to a significant gap between actual research output and reported metrics.
+                </p>
+</div>
+</div>
+<!-- Right Panel -->
+<div class="right-col">
+<!-- Item 1 -->
+<div class="pain-point-item">
+<div class="icon-box icon-manual">
+<i class="fas fa-cloud-upload-alt"></i>
+</div>
+<div class="content-box">
+<div class="item-title">Manual Uploads &amp; Fragmentation</div>
+<p class="item-desc">Faculty must manually enter data into multiple portals, leading to fatigue and resistance.</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="pain-point-item">
+<div class="icon-box icon-admin">
+<i class="fas fa-file-invoice-dollar"></i>
+</div>
+<div class="content-box">
+<div class="item-title">Administrative Burden</div>
+<p class="item-desc">Compiling reports for NAAC, NIRF, and NBA takes months of manual reconciliation.</p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="pain-point-item">
+<div class="icon-box icon-time">
+<i class="fas fa-hourglass-half"></i>
+</div>
+<div class="content-box">
+<div class="item-title">Months Wasted</div>
+<p class="item-desc">Valuable research time is lost to data entry and verification instead of innovation.</p>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="pain-point-item">
+<div class="icon-box icon-data">
+<i class="fas fa-database"></i>
+</div>
+<div class="content-box">
+<div class="item-title">Duplicate Entries &amp; Errors</div>
+<p class="item-desc">Lack of a centralized version control leads to inconsistent and inaccurate records.</p>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="pain-point-item">
+<div class="icon-box icon-impact">
+<i class="fas fa-eye-slash"></i>
+</div>
+<div class="content-box">
+<div class="item-title">Underreported Impact</div>
+<p class="item-desc">Without real-time tracking, many achievements go unnoticed in global rankings.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

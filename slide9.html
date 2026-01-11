@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Core Modules - RIMS</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Slate 900 */
+            color: white;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #0f172a;
+            overflow: hidden;
+            padding: 2rem 3rem;
+        }
+
+        /* Background Shapes */
+        .bg-shape-1 {
+            position: absolute;
+            top: -150px;
+            right: -100px;
+            width: 600px;
+            height: 600px;
+            background-color: #1e3a8a; /* Blue 900 */
+            border-radius: 50%;
+            opacity: 0.25;
+            filter: blur(80px);
+            z-index: 0;
+        }
+
+        .bg-shape-2 {
+            position: absolute;
+            bottom: -150px;
+            left: -100px;
+            width: 500px;
+            height: 500px;
+            background-color: #0f766e; /* Teal 700 */
+            border-radius: 50%;
+            opacity: 0.15;
+            filter: blur(80px);
+            z-index: 0;
+        }
+
+        /* Header */
+        .header-section {
+            z-index: 10;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #f8fafc;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Grid Layout */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 1.25rem;
+            z-index: 10;
+            flex: 1;
+            padding-bottom: 1rem;
+        }
+
+        /* Card Styles */
+        .module-card {
+            background-color: rgba(30, 41, 59, 0.6); /* Slate 800 transparent */
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(30, 41, 59, 0.9);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Top Color Bar */
+        .card-top-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+        }
+
+        /* Card Header */
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .icon-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #f1f5f9;
+        }
+
+        /* List Items */
+        .entity-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .entity-item {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .entity-item::before {
+            content: "";
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Color Variations */
+        /* Publications - Cyan */
+        .bar-cyan { background-color: #22d3ee; }
+        .icon-cyan { background-color: rgba(34, 211, 238, 0.1); color: #22d3ee; border: 1px solid rgba(34, 211, 238, 0.2); }
+        .hover-cyan:hover { border-color: rgba(34, 211, 238, 0.4); }
+
+        /* Awards - Amber */
+        .bar-amber { background-color: #fbbf24; }
+        .icon-amber { background-color: rgba(251, 191, 36, 0.1); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.2); }
+        .hover-amber:hover { border-color: rgba(251, 191, 36, 0.4); }
+
+        /* Projects - Emerald */
+        .bar-emerald { background-color: #34d399; }
+        .icon-emerald { background-color: rgba(52, 211, 153, 0.1); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.2); }
+        .hover-emerald:hover { border-color: rgba(52, 211, 153, 0.4); }
+
+        /* Events - Rose */
+        .bar-rose { background-color: #fb7185; }
+        .icon-rose { background-color: rgba(251, 113, 133, 0.1); color: #fb7185; border: 1px solid rgba(251, 113, 133, 0.2); }
+        .hover-rose:hover { border-color: rgba(251, 113, 133, 0.4); }
+
+        /* Books - Indigo */
+        .bar-indigo { background-color: #818cf8; }
+        .icon-indigo { background-color: rgba(129, 140, 248, 0.1); color: #818cf8; border: 1px solid rgba(129, 140, 248, 0.2); }
+        .hover-indigo:hover { border-color: rgba(129, 140, 248, 0.4); }
+
+        /* IPR - Purple */
+        .bar-purple { background-color: #c084fc; }
+        .icon-purple { background-color: rgba(192, 132, 252, 0.1); color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.2); }
+        .hover-purple:hover { border-color: rgba(192, 132, 252, 0.4); }
+
+        /* Admin - Blue */
+        .bar-blue { background-color: #60a5fa; }
+        .icon-blue { background-color: rgba(96, 165, 250, 0.1); color: #60a5fa; border: 1px solid rgba(96, 165, 250, 0.2); }
+        .hover-blue:hover { border-color: rgba(96, 165, 250, 0.4); }
+
+        /* Dashboards - Sky */
+        .bar-sky { background-color: #38bdf8; }
+        .icon-sky { background-color: rgba(56, 189, 248, 0.1); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.2); }
+        .hover-sky:hover { border-color: rgba(56, 189, 248, 0.4); }
+
+        /* Background Pattern */
+        .grid-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<div class="bg-shape-1"></div>
+<div class="bg-shape-2"></div>
+<div class="grid-pattern"></div>
+<!-- Header -->
+<div class="header-section">
+<h2>Core Modules</h2>
+<p class="subtitle">A structured, modular ecosystem covering every aspect of institutional research management.</p>
+</div>
+<!-- Grid -->
+<div class="modules-grid">
+<!-- 1. Publications -->
+<div class="module-card hover-cyan">
+<div class="card-top-bar bar-cyan"></div>
+<div class="card-header">
+<div class="icon-circle icon-cyan"><i class="fas fa-book-open"></i></div>
+<h3 class="card-title">Publications</h3>
+</div>
+<ul class="entity-list">
+<li class="entity-item">Journal Articles &amp; Conf. Papers</li>
+<li class="entity-item">Authorship &amp; Affiliations</li>
+<li class="entity-item">Citation Tracking</li>
+<li class="entity-item">SDG Tagging &amp; Indexing</li>
+</ul>
+</div>
+<!-- 2. Awards -->
+<div class="module-card hover-amber">
+<div class="card-top-bar bar-amber"></div>
+<div class="card-header">
+<div class="icon-circle icon-amber"><i class="fas fa-trophy"></i></div>
+<h3 class="card-title">Awards</h3>
+</div>
+<ul class="entity-list">
+<li class="entity-item">Award Certificates</li>
+<li class="entity-item">OCR Extraction Workflow</li>
+<li class="entity-item">Verification System</li>
+<li class="entity-item">Recognition Tracking</li>
+</ul>
+</div>
+<!-- 3. Projects -->
+<div class="module-card hover-emerald">
+<div class="card-top-bar bar-emerald"></div>
+<div class="card-header">
+<div class="icon-circle icon-emerald"><i class="fas fa-project-diagram"></i></div>
+<h3 class="card-title">Projects</h3>
+</div>
+<ul class="entity-list">
+<li class="entity-item">Research Projects</li>
+<li class="entity-item">Funding Agencies</li>
+<li class="entity-item">Co-Investigators</li>
+<li class="entity-item">Grant Utilization Status</li>
+</ul>
+</div>
+<!-- 4. Events -->
+<div class="module-card hover-rose">
+<div class="card-top-bar bar-rose"></div>
+<div class="card-header">
+<div class="icon-circle icon-rose"><i class="fas fa-calendar-alt"></i></div>
+<h3 class="card-title">Events</h3>
+</div>
+<ul class="entity-list">
+<li class="entity-item">FDPs &amp; Conferences</li>
+<li class="entity-item">Organizers &amp; Speakers</li>
+<li class="entity-item">Participant Records</li>
+<li class="entity-item">Event Outcomes</li>
+</ul>
+</div>
+<!-- 5. Books & Chapters -->
+<div class="module-card hover-indigo">
+<div class="card-top-bar bar-indigo"></div>
+<div class="card-header">
+<div class="icon-circle icon-indigo"><i class="fas fa-swatchbook"></i></div>
+<h3 class="card-title">Books &amp; Chapters</h3>
+</div>
+<ul class="entity-list">
+<li class="entity-item">Book Publications</li>
+<li class="entity-item">Book Chapters</li>
+<li class="entity-item">Editors &amp; Publishers</li>
+<li class="entity-item">ISBN Verification</li>
+</ul>
+</div>
+<!-- 6. IPR / Patents -->
+<div class="module-card hover-purple">
+<div class="card-top-bar bar-purple"></div>
+<div class="card-header">
+<div class="icon-circle icon-purple"><i class="fas fa-certificate"></i></div>
+<h3 class="card-title">IPR &amp; Patents</h3>
+</div>
+<ul class="entity-list">
+<li class="entity-item">Patent Registrations</li>
+<li class="entity-item">Copyrights</li>
+<li class="entity-item">Application Status</li>
+<li class="entity-item">Grant Details</li>
+</ul>
+</div>
+<!-- 7. Admin & Profiles -->
+<div class="module-card hover-blue">
+<div class="card-top-bar bar-blue"></div>
+<div class="card-header">
+<div class="icon-circle icon-blue"><i class="fas fa-users-cog"></i></div>
+<h3 class="card-title">Admin &amp; Profiles</h3>
+</div>
+<ul class="entity-list">
+<li class="entity-item">User Management</li>
+<li class="entity-item">Department Structure</li>
+<li class="entity-item">Role Assignments</li>
+<li class="entity-item">Faculty Profiles</li>
+</ul>
+</div>
+<!-- 8. Dashboards -->
+<div class="module-card hover-sky">
+<div class="card-top-bar bar-sky"></div>
+<div class="card-header">
+<div class="icon-circle icon-sky"><i class="fas fa-chart-pie"></i></div>
+<h3 class="card-title">Dashboards</h3>
+</div>
+<ul class="entity-list">
+<li class="entity-item">Metrics_Data Aggregation</li>
+<li class="entity-item">Institutional Analytics</li>
+<li class="entity-item">Compliance Exports</li>
+<li class="entity-item">Benchmarking Tools</li>
+</ul>
+</div>
+</div>
+</div>
+</body>
+</html>
