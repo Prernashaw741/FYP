@@ -15,17 +15,20 @@
             font-family: 'Inter', sans-serif;
             background-color: #0f172a; /* Slate 900 */
             color: white;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         .slide-container {
-            width: 1280px;
-            height: 720px;
+            width: 100vw;
+            min-height: 100vh;
+            height: auto;
             position: relative;
             display: flex;
             flex-direction: column;
             background-color: #0f172a;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             padding: 2rem 4rem;
         }
 
@@ -108,7 +111,8 @@
             padding: 0.85rem 1.5rem;
             transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             backdrop-filter: blur(5px);
         }
 
@@ -353,3 +357,6 @@
 </div>
 </body>
 </html>
+
+
+

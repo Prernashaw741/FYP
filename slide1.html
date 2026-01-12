@@ -16,11 +16,13 @@
             background-color: #f3f4f6;
         }
         .slide-container {
-            width: 1280px;
-            height: 720px;
+            width: 100vw;
+            min-height: 100vh;
+            height: auto;
             background-color: #0f172a; /* Slate 900 */
             position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -178,21 +180,25 @@
 <!-- Column 1: Student Info -->
 <div class="detail-item">
 <p class="detail-label"><i class="fas fa-user-graduate mr-2"></i>Presented By</p>
-<p class="detail-value">[Student Name Placeholder]</p>
-<p class="text-gray-400 text-sm mt-1">Roll No: [ID Placeholder]</p>
+<p class="detail-value">Prerna Shaw</p>
+<p class="text-gray-400 text-sm mt-1">Roll No:221003003064</p>
+<p class="detail-value">Aditi Panigrahi</p>
+<p class="text-gray-400 text-sm mt-1">Roll No:221003003089</p>
+<p class="detail-value">Aishwarya Gupta</p>
+<p class="text-gray-400 text-sm mt-1">Roll No:221003003032</p>
 </div>
 <!-- Column 2: Guide Info -->
 <div class="detail-item border-l border-gray-700 pl-8">
 <p class="detail-label"><i class="fas fa-chalkboard-teacher mr-2"></i>Guided By</p>
-<p class="detail-value">[Guide Name Placeholder]</p>
-<p class="text-gray-400 text-sm mt-1">[Designation]</p>
+<p class="detail-value">Prof. Sukumar Chakraborty</p>
+<p class="text-gray-400 text-sm mt-1">Assistant Professor</p>
 </div>
 <!-- Column 3: Department Info -->
 <div class="detail-item border-l border-gray-700 pl-8">
 <p class="detail-label"><i class="fas fa-university mr-2"></i>Department &amp; Institution</p>
-<p class="detail-value">[Department Name]</p>
-<p class="text-gray-400 text-sm mt-1">[College/University Name]</p>
-<p class="text-gray-500 text-xs mt-2"><i class="far fa-calendar-alt mr-1"></i> [Date Placeholder]</p>
+<p class="detail-value">the Department of Computer Science and Engineering - Artificial Intelligence</p>
+<p class="text-gray-400 text-sm mt-1">Techno India University</p>
+<p class="text-gray-500 text-xs mt-2"><i class="far fa-calendar-alt mr-1"></i> 14/01/2026</p>
 </div>
 </div>
 </div>
@@ -212,3 +218,6 @@
 </div>
 </body>
 </html>
+
+
+

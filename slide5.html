@@ -15,16 +15,19 @@
             font-family: 'Inter', sans-serif;
             background-color: #0f172a;
             color: white;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         .slide-container {
-            width: 1280px;
-            height: 720px;
+            width: 100vw;
+            min-height: 100vh;
+            height: auto;
             position: relative;
             display: flex;
             background-color: #0f172a;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         /* Simulated Gradients using Blobs */
@@ -154,7 +157,8 @@
             transition: all 0.3s ease;
             backdrop-filter: blur(12px);
             position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         .feature-card:hover {
@@ -308,3 +312,6 @@
 </div>
 </body>
 </html>
+
+
+

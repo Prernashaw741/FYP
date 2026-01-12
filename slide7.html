@@ -15,12 +15,14 @@
             font-family: 'Inter', sans-serif;
             background-color: #0f172a; /* Slate 900 */
             color: white;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         .slide-container {
-            width: 1280px;
-            height: 720px;
+            width: 100vw;
+            min-height: 100vh;
+            height: auto;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -101,7 +103,8 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             width: calc(25% - 1.2rem); /* 4 cards per row approx */
             position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             backdrop-filter: blur(8px);
         }
 
@@ -269,3 +272,6 @@
 </div>
 </body>
 </html>
+
+
+

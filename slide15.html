@@ -15,17 +15,20 @@
             font-family: 'Inter', sans-serif;
             background-color: #0f172a; /* Slate 900 */
             color: white;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         .slide-container {
-            width: 1280px;
-            height: 720px;
+            width: 100vw;
+            min-height: 100vh;
+            height: auto;
             position: relative;
             display: flex;
             flex-direction: column;
             background-color: #0f172a;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             justify-content: center;
             align-items: center;
         }
@@ -275,7 +278,7 @@
 <!-- Guide -->
 <div class="ack-person text-right">
 <span class="ack-role">Project Guide</span>
-<h3>[Guide Name]</h3>
+<h3>Prof. Sukumar Chakraborty</h3>
 <p>Department of Computer Science</p>
 </div>
 <!-- Divider -->
@@ -283,25 +286,12 @@
 <!-- Institution -->
 <div class="ack-person text-left">
 <span class="ack-role">Institution</span>
-<h3>[College/University Name]</h3>
+<h3>Techno India University</h3>
 <p>2026 Academic Year</p>
 </div>
 </div>
 </div>
 <!-- Contact Info -->
-<div class="contact-row">
-<div class="contact-item">
-<div class="icon-circle">
-<i class="fas fa-envelope"></i>
-</div>
-<span>student.email@college.edu</span>
-</div>
-<div class="contact-item">
-<div class="icon-circle">
-<i class="fab fa-linkedin-in"></i>
-</div>
-<span>linkedin.com/in/student</span>
-</div>
 <div class="contact-item">
 <div class="icon-circle">
 <i class="fas fa-globe"></i>
@@ -324,3 +314,5 @@
 </div>
 </body>
 </html>
+
+
